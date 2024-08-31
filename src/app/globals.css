@@ -6,6 +6,9 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --spacing-small: 0.5rem;
+  --spacing-medium: 1rem;
+  --spacing-large: 1.5rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -26,8 +29,88 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: var(--spacing-medium);
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+}
+
+input[type="text"],
+input[type="email"],
+button {
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+button:focus {
+  outline: 2px solid #0056b3;
+  outline-offset: 2px;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .btn-primary {
+    @apply bg-blue-500 text-white py-2 px-4 rounded;
+  }
+
+  .btn-primary:hover {
+    @apply bg-blue-600;
+  }
+
+  .btn-primary:disabled {
+    @apply bg-gray-300 cursor-not-allowed;
+  }
+
+  .mb-small {
+    margin-bottom: var(--spacing-small);
+  }
+
+  .mb-medium {
+    margin-bottom: var(--spacing-medium);
+  }
+
+  .mb-large {
+    margin-bottom: var(--spacing-large);
+  }
+  .logo-image {
+    width: 200px;
+    height: auto; /* Ensures the aspect ratio is maintained */
+    margin-bottom: var(
+      --spacing-medium
+    ); /* Optional: Adds space below the image */
   }
 }
