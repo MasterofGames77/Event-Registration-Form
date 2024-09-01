@@ -60,7 +60,7 @@ const RegisterForm = () => {
         className="logo-image"
         priority
       />
-      <h2>StartupWeek RI</h2>
+      <h2>Event Registration</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name">Name:</label>
