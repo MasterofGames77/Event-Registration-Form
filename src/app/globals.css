@@ -46,6 +46,8 @@ body {
 
 input[type="text"],
 input[type="email"],
+input[type="tel"], /* Added styling for phone input */
+input[type="text"], /* This will also cover the affiliation input */
 button {
   padding: 0.5rem;
   margin: 0.5rem 0;
@@ -73,6 +75,7 @@ button:disabled {
 
 input[type="text"]:focus,
 input[type="email"]:focus,
+input[type="tel"]:focus, /* Added focus styling for phone input */
 button:focus {
   outline: 2px solid #0056b3;
   outline-offset: 2px;
@@ -106,6 +109,7 @@ button:focus {
   .mb-large {
     margin-bottom: var(--spacing-large);
   }
+
   .logo-image {
     width: 200px;
     height: auto; /* Ensures the aspect ratio is maintained */

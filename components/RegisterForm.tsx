@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
+import Image from "next/image"; // Import Next.js Image component
 import axios from "axios";
 
 const RegisterForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState(""); // New state for phone number
+  const [affiliation, setAffiliation] = useState(""); // New state for affiliation
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
@@ -19,15 +21,22 @@ const RegisterForm = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post("/api/register", { name, email });
+      const response = await axios.post("/api/register", {
+        name,
+        email,
+        phone,
+        affiliation,
+      });
       if (response.data.alreadyRegistered) {
-        setMessage("You are already registered with this email address."); // Updated message for already registered user
+        setMessage("You are already registered with this email address.");
       } else {
         setMessage("You have been successfully registered!");
       }
       setSubmitted(true);
       setName("");
       setEmail("");
+      setPhone(""); // Clear phone field
+      setAffiliation(""); // Clear affiliation field
     } catch (err: any) {
       if (err.response && err.response.data && err.response.data.message) {
         setError(err.response.data.message);
@@ -42,10 +51,8 @@ const RegisterForm = () => {
   if (submitted) {
     return (
       <div className="form-container">
-        <h1>Thank You! You have successfully registered!</h1>
-        <p style={{ color: "green", fontSize: "18px" }}>
-          {message} {/* Updated message */}
-        </p>
+        <h1>Thank You!</h1>
+        <p style={{ color: "green", fontSize: "18px" }}>{message}</p>
       </div>
     );
   }
@@ -55,8 +62,8 @@ const RegisterForm = () => {
       <Image
         src="/ri-startup-logo.png"
         alt="StartupWeek Rhode Island Logo"
-        width={200}
-        height={200}
+        width={150}
+        height={150}
         className="logo-image"
         priority
       />
@@ -81,6 +88,27 @@ const RegisterForm = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            disabled={loading}
+          />
+        </div>
+        <div>
+          <label htmlFor="phone">Phone Number:</label>
+          <input
+            type="tel"
+            id="phone"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            required
+            disabled={loading}
+          />
+        </div>
+        <div>
+          <label htmlFor="affiliation">Affiliation:</label>
+          <input
+            type="text"
+            id="affiliation"
+            value={affiliation}
+            onChange={(e) => setAffiliation(e.target.value)}
             disabled={loading}
           />
         </div>

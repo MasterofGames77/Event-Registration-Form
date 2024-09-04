@@ -6,10 +6,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   await connectMongo();  // Ensure MongoDB connection is established
 
   if (req.method === 'POST') {
-    const { name, email } = req.body;
+    const { name, email, phone, affiliation } = req.body;
 
-    if (!name || !email) {
-      return res.status(400).json({ message: 'Name and Email are required.' });
+    if (!name || !email || !phone) {
+      return res.status(400).json({ message: 'Name, Email, and Phone number are required.' });
     }
 
     try {
@@ -21,7 +21,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
 
       // If not registered, create a new Event document in MongoDB
-      const newEvent = new Event({ name, email });
+      const newEvent = new Event({ name, email, phone, affiliation });
 
       // Save the document to the collection
       await newEvent.save();
